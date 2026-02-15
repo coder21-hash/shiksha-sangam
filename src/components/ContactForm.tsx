@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 const STANDARDS = [
   'std_1', 'std_2', 'std_3', 'std_4', 'std_5',
   'std_6', 'std_7', 'std_8', 'std_9', 'std_10',
-  'std_11_sci', 'std_11_com', 'std_12_sci', 'std_12_com',
+  'std_11_com', 'std_12_com',
 ];
 
 const PHONE_NUMBER = '9374973636';
