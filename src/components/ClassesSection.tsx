@@ -6,7 +6,6 @@ const ClassesSection = () => {
   const { t } = useLanguage();
 
   const classes = [
-    { icon: BookOpen, title: 'class_primary', desc: 'class_primary_desc', color: 'bg-emerald-500/10 text-emerald-600' },
     { icon: Calculator, title: 'class_middle', desc: 'class_middle_desc', color: 'bg-blue-500/10 text-blue-600' },
     { icon: FlaskConical, title: 'class_high', desc: 'class_high_desc', color: 'bg-amber-500/10 text-amber-600' },
     { icon: Briefcase, title: 'class_higher', desc: 'class_higher_desc', color: 'bg-purple-500/10 text-purple-600' },

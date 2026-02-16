@@ -19,7 +19,6 @@ const WhyUsSection = () => {
     { icon: MessageCircleQuestion, title: 'why7_title', desc: 'why7_desc' },
     { icon: Compass, title: 'why8_title', desc: 'why8_desc' },
     { icon: Users, title: 'why9_title', desc: 'why9_desc' },
-    { icon: Laptop, title: 'why10_title', desc: 'why10_desc' },
     { icon: LayoutGrid, title: 'why11_title', desc: 'why11_desc' },
     { icon: BookOpenCheck, title: 'why12_title', desc: 'why12_desc' },
   ];

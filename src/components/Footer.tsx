@@ -13,14 +13,14 @@ const Footer = () => {
               <GraduationCap className="w-6 h-6 text-primary-foreground" />
             </div>
             <span className="font-display text-xl font-bold">
-              {language === 'en' ? 'Excel Coaching' : 'એક્સેલ કોચિંગ'}
+              {language === 'en' ? 'Yash Personal Tution' : 'યશ પર્સનલ ટ્યુશન'}
             </span>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-6 text-sm text-primary-foreground/70">
             <div className="flex items-center gap-2">
               <Phone className="w-4 h-4" />
-              <span>{t('footer_phone')}: +91 93749 73636</span>
+              <span>{t('footer_phone')}: +91 96240 52715</span>
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4" />
@@ -30,7 +30,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 pt-6 border-t border-primary-foreground/10 text-center text-sm text-primary-foreground/50">
-          © {new Date().getFullYear()} Excel Coaching. {t('footer_rights')}.
+          © {new Date().getFullYear()} Yash Personal Tution. {t('footer_rights')}.
         </div>
       </div>
     </footer>
