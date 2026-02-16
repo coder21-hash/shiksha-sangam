@@ -31,7 +31,7 @@ const Navbar = () => {
               <GraduationCap className="w-6 h-6 text-primary-foreground" />
             </div>
             <span className="font-display text-xl font-bold text-foreground hidden sm:block">
-              {language === 'en' ? 'Excel Coaching' : 'એક્સેલ કોચિંગ'}
+              {language === 'en' ? 'Yash Personal Tution' : 'યશ પર્સનલ ટ્યુશન'}
             </span>
           </a>
 
