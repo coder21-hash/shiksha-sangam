@@ -49,36 +49,23 @@ const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      // These are placeholders. You'll need to provide your actual EmailJS credentials
-      // Or I can instruct the user how to get them.
-      const serviceId = 'service_pzk4a8s'; // This should be updated by the user
-      const templateId = 'template_r7y6f7a'; // This should be updated by the user
-      const publicKey = 'user_XXXXXX'; // This should be updated by the user
-
-      // For now, we use a slightly more generic approach if they haven't set it up
-      // But user asked for it to work in production.
-      // I will implement the send call. 
-      
       const templateParams = {
-        student_name: formData.studentName,
-        parent_name: formData.parentName || 'N/A',
-        phone: formData.phone,
-        email: formData.email || 'N/A',
+        student_name: formData.studentName.trim(),
+        parent_name: formData.parentName.trim() || 'N/A',
+        phone: formData.phone.trim(),
+        email: formData.email.trim() || 'N/A',
         standard: t(formData.standard),
         medium: t(formData.medium),
-        message: formData.message || 'N/A',
+        message: formData.message.trim() || 'N/A',
         to_email: 'akshatshah187@gmail.com',
         subject: 'New Enquiry - Yash Personal Tution'
       };
 
-      // Note: In a real production app, we would use environment variables.
-      // Since this is a direct request, I'll explain to the user they need to set up EmailJS.
-      
       await emailjs.send(
-        'service_default', // Default service often works if only one is configured
-        'template_default', // placeholder
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || '',
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '',
         templateParams,
-        'public_key_placeholder' // placeholder
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || ''
       );
 
       setSubmitted(true);
@@ -86,10 +73,8 @@ const ContactForm = () => {
       setFormData({ parentName: '', studentName: '', phone: '', email: '', standard: '', medium: '', message: '' });
       setTimeout(() => setSubmitted(false), 5000);
     } catch (error) {
-      console.error('Email error:', error);
-      // Even if EmailJS isn't configured yet, we want to show the intent.
-      // I'll add a fallback message or just toast error.
-      toast.error(t('form_error') + " (Please configure EmailJS credentials)");
+      console.error('Email send error:', error);
+      toast.error(t('form_error'));
     } finally {
       setIsSubmitting(false);
     }
