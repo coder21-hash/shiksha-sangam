@@ -2,7 +2,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { GraduationCap, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <footer className="bg-primary text-primary-foreground py-12">
@@ -13,7 +13,7 @@ const Footer = () => {
               <GraduationCap className="w-6 h-6 text-primary-foreground" />
             </div>
             <span className="font-display text-xl font-bold">
-              {language === 'en' ? 'Yash Personal Tution' : 'યશ પર્સનલ ટ્યુશન'}
+              {t('footer_brand')}
             </span>
           </div>
 
@@ -30,7 +30,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 pt-6 border-t border-primary-foreground/10 text-center text-sm text-primary-foreground/50">
-          © {new Date().getFullYear()} Yash Personal Tution. {t('footer_rights')}.
+          © {new Date().getFullYear()} {t('footer_brand')}. {t('footer_rights')}.
         </div>
       </div>
     </footer>

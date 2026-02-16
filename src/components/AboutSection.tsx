@@ -6,9 +6,9 @@ const AboutSection = () => {
   const { t } = useLanguage();
 
   const stats = [
-    { icon: Award, value: '15+', key: 'about_exp' },
-    { icon: Users, value: '500+', key: 'about_students' },
-    { icon: TrendingUp, value: '95%', key: 'about_results' },
+    { icon: Award, value: '30+', key: 'about_exp' },
+    { icon: Users, value: '3000+', key: 'about_students' },
+    { icon: TrendingUp, value: '99%', key: 'about_results' },
   ];
 
   return (

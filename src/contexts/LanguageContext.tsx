@@ -101,6 +101,7 @@ const translations: Translations = {
   std_12_com: { en: 'Standard 12 - Commerce', gu: 'ધોરણ ૧૨ - વાણિજ્ય' },
 
   // Footer
+  footer_brand: { en: 'Yash Personal Tution', gu: 'યશ પર્સનલ ટ્યુશન' },
   footer_rights: { en: 'All Rights Reserved', gu: 'સર્વ હક્ક અમારી પાસે રાખેલ છે' },
   footer_address: { en: 'Contact Us', gu: 'અમારો સંપર્ક' },
   footer_phone: { en: 'Phone', gu: 'ફોન' },

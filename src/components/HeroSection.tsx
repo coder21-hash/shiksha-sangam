@@ -96,7 +96,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="flex-shrink-0"
           >
-            <div className="relative bg-card rounded-2xl shadow-2xl p-4 sm:p-6 w-[280px] sm:w-[500px]">
+            <div className="relative bg-card rounded-2xl shadow-2xl p-4 sm:p-6 w-[280px] sm:w-[450px]">
               <div className="rounded-xl overflow-hidden bg-muted aspect-[3/4] mb-4 ">
                 <img
                   src={fatherPhoto}
