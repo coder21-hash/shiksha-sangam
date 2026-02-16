@@ -1,7 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 import { ArrowRight, Phone, Award, Users } from 'lucide-react';
-import fatherPhoto from '@/assets/father-photo.jpg';
+import fatherPhoto from '@/assets/father-photo.png';
 
 const HeroSection = () => {
   const { t } = useLanguage();
