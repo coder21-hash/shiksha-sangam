@@ -19,13 +19,13 @@ const ContactForm = () => {
     parentName: '',
     studentName: '',
     phone: '',
-    email: '',
     standard: '',
     medium: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [debugParams, setDebugParams] = useState<any>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -48,12 +48,32 @@ const ContactForm = () => {
 
     setIsSubmitting(true);
 
+    // Read env vars (Vite prefixes)
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
+    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
+    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
+
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      console.error('EmailJS env missing', { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY });
+      toast.error('Email service is not configured. Please contact the site admin.');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
+      // initialize EmailJS (helps ensure proper setup)
+      try {
+        // emailjs.init is safe to call multiple times
+        // @ts-ignore
+        if (typeof emailjs.init === 'function') emailjs.init(PUBLIC_KEY);
+      } catch (initErr) {
+        console.warn('emailjs.init warning:', initErr);
+      }
+
       const templateParams = {
         student_name: formData.studentName.trim(),
         parent_name: formData.parentName.trim() || 'N/A',
         phone: formData.phone.trim(),
-        email: formData.email.trim() || 'N/A',
         standard: t(formData.standard),
         medium: t(formData.medium),
         message: formData.message.trim() || 'N/A',
@@ -61,20 +81,29 @@ const ContactForm = () => {
         subject: 'New Enquiry - Yash Personal Tution'
       };
 
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID || '',
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '',
-        templateParams,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || ''
-      );
+      // Debug: expose params for local inspection (dev only)
+      try {
+        setDebugParams(templateParams);
+        // also expose on window for quick copy/paste when debugging
+        // @ts-ignore
+        if (typeof window !== 'undefined') window.__lastEmailJsTemplateParams = templateParams;
+        console.debug('EmailJS templateParams:', templateParams);
+      } catch (dErr) {
+        console.warn('debug set failed', dErr);
+      }
+
+      // attempt to send
+      const resp = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      console.info('EmailJS send response:', resp);
 
       setSubmitted(true);
       toast.success(t('form_success'));
-      setFormData({ parentName: '', studentName: '', phone: '', email: '', standard: '', medium: '', message: '' });
+      setFormData({ parentName: '', studentName: '', phone: '', standard: '', medium: '', message: '' });
       setTimeout(() => setSubmitted(false), 5000);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Email send error:', error);
-      toast.error(t('form_error'));
+      const message = error?.text || error?.message || JSON.stringify(error);
+      toast.error(`${t('form_error')}: ${message}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -110,6 +139,7 @@ const ContactForm = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             onSubmit={handleSubmit}
+            ref={formRef}
             className="p-6 sm:p-8 rounded-2xl bg-card shadow-card space-y-5"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -159,22 +189,6 @@ const ContactForm = () => {
                 />
               </div>
 
-              {/* Email */}
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-1.5">{t('form_email')}</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  maxLength={100}
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
-                  placeholder="email@example.com"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Standard */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1.5">{t('form_standard')} *</label>
@@ -191,7 +205,9 @@ const ContactForm = () => {
                   ))}
                 </select>
               </div>
+            </div>
 
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Medium */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1.5">{t('form_medium')} *</label>
@@ -208,20 +224,20 @@ const ContactForm = () => {
                   ))}
                 </select>
               </div>
-            </div>
 
-            {/* Message */}
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">{t('form_message')}</label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                rows={4}
-                maxLength={500}
-                className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow resize-none"
-                placeholder={t('form_message')}
-              />
+              {/* Message (keeps layout consistent) */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1.5">{t('form_message')}</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={4}
+                  maxLength={500}
+                  className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow resize-none"
+                  placeholder={t('form_message')}
+                />
+              </div>
             </div>
 
             <button
