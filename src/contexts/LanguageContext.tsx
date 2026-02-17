@@ -32,6 +32,8 @@ const translations: Translations = {
   // About
   about_title: { en: 'About Our Coaching', gu: 'અમારા કોચિંગ વિશે' },
   about_desc: { en: 'With over 30 years of dedicated teaching experience, we provide personalized attention to every student. Our mission is to build strong fundamentals and help students achieve academic excellence through patient, one-on-one guidance. We offer coaching in both Gujarati and English medium.', gu: '૩૦ વર્ષથી વધુના સમર્પિત શિક્ષણ અનુભવ સાથે, અમે દરેક વિદ્યાર્થીને વ્યક્તિગત ધ્યાન આપીએ છીએ. અમારું ધ્યેય મજબૂત પાયા બનાવવાનું અને ધીરજપૂર્ણ, વ્યક્તિગત માર્ગદર્શન દ્વારા વિદ્યાર્થીઓને શૈક્ષણિક ઉત્કૃષ્ટતા પ્રાપ્ત કરવામાં મદદ કરવાનું છે. અમે ગુજરાતી અને અંગ્રેજી બંને માધ્યમમાં કોચિંગ આપીએ છીએ.' },
+  about_location_label: { en: 'Service Area', gu: 'સેવા વિસ્તાર' },
+  about_location_value: { en: 'Ahmedabad, Gujarat, India', gu: 'અમદાવાદ, ગુજરાત, ભારત' },
   about_exp: { en: 'Years of Experience', gu: 'વર્ષોનો અનુભવ' },
   about_students: { en: 'Students Taught', gu: 'ભણાવેલ વિદ્યાર્થીઓ' },
   about_results: { en: 'Success Rate', gu: 'સફળતા દર' },
@@ -103,7 +105,8 @@ const translations: Translations = {
   // Footer
   footer_brand: { en: 'Yash Personal Tution', gu: 'યશ પર્સનલ ટ્યુશન' },
   footer_rights: { en: 'All Rights Reserved', gu: 'સર્વ હક્ક અમારી પાસે રાખેલ છે' },
-  footer_address: { en: 'Contact Us', gu: 'અમારો સંપર્ક' },
+  footer_location_label: { en: 'Location', gu: 'સ્થળ' },
+  footer_address: { en: 'Ahmedabad, Gujarat, India', gu: 'અમદાવાદ, ગુજરાત, ભારત' },
   footer_phone: { en: 'Phone', gu: 'ફોન' },
 };
 

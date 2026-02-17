@@ -1,6 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
-import { Award, Users, TrendingUp } from 'lucide-react';
+import { Award, Users, TrendingUp, MapPin } from 'lucide-react';
 
 const AboutSection = () => {
   const { t } = useLanguage();
@@ -32,6 +32,17 @@ const AboutSection = () => {
           >
             {t('about_desc')}
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/15 text-sm text-foreground mb-12"
+          >
+            <MapPin className="w-4 h-4 text-primary" />
+            <span className="font-medium">{t('about_location_label')}:</span>
+            <span>{t('about_location_value')}</span>
+          </motion.div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
