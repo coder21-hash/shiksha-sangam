@@ -40,12 +40,12 @@ const translations: Translations = {
 
   // Classes
   classes_title: { en: 'Classes We Offer', gu: 'અમે આપતા વર્ગો' },
-  classes_subtitle: { en: 'Comprehensive coaching for English and Gujarati medium', gu: 'અંગ્રેજી અને ગુજરાતી માધ્યમ માટે વ્યાપક કોચિંગ' },
-  class_middle: { en: 'Middle School (5-8)', gu: 'માધ્યમિક (૫-૮)' },
+  classes_subtitle: { en: 'Comprehensive coaching for English and Gujarati medium.', gu: 'અંગ્રેજી અને ગુજરાતી માધ્યમ માટે વ્યાપક કોચિંગ.' },
+  class_middle: { en: 'Foundation (5-8)', gu: 'પાયા (૫-૮)' },
   class_middle_desc: { en: 'Strong foundation building in Mathematics, Science, and English with concept clarity, regular practice, and doubt-solving support.', gu: 'ગણિત, વિજ્ઞાન અને અંગ્રેજીમાં કન્સેપ્ટ ક્લેરિટી, નિયમિત પ્રેક્ટિસ અને શંકા-નિવારણ સપોર્ટ સાથે મજબૂત પાયાનું નિર્માણ.' },
-  class_high: { en: 'High School (9-10)', gu: 'ઉચ્ચ માધ્યમિક (૯-૧૦)' },
+  class_high: { en: 'Board Prep (9-10)', gu: 'બોર્ડ પ્રિપ (૯-૧૦)' },
   class_high_desc: { en: 'Board exam preparation with focused coaching, previous year papers, and performance tracking.', gu: 'કેન્દ્રિત કોચિંગ, પાછલા વર્ષના પેપર્સ અને પ્રદર્શન ટ્રેકિંગ સાથે બોર્ડ પરીક્ષાની તૈયારી.' },
-  class_higher: { en: 'Higher Secondary (11-12)', gu: 'ઉચ્ચતર માધ્યમિક (૧૧-૧૨)' },
+  class_higher: { en: 'Commerce (11-12)', gu: 'કોમર્સ (૧૧-૧૨)' },
   class_higher_desc: { en: 'Specialized coaching for Commerce stream with expert guidance in Accounts, Economics, and Business Studies.', gu: 'એકાઉન્ટ્સ, ઇકોનોમિક્સ અને બિઝનેસ સ્ટડીઝમાં નિષ્ણાત માર્ગદર્શન સાથે કોમર્સ સ્ટ્રીમ માટે વિશેષ કોચિંગ.' },
 
   // Why Us
@@ -72,7 +72,7 @@ const translations: Translations = {
   why11_title: { en: 'Limited Batch Size', gu: 'મર્યાદિત બેચ સાઈઝ' },
   why11_desc: { en: 'We keep batch sizes small to ensure maximum focus and personal engagement with every student.', gu: 'દરેક વિદ્યાર્થી સાથે મહત્તમ ધ્યાન માટે બેચ સાઈઝ નાની રાખીએ છીએ.' },
   why12_title: { en: 'Both Mediums Available', gu: 'બંને માધ્યમ ઉપલબ્ધ' },
-  why12_desc: { en: 'We offer coaching in both Gujarati and English medium. For 11th-12th, we specialize in Commerce stream only.', gu: 'અમે ગુજરાતી અને અંગ્રેજી બંને માધ્યમમાં કોચિંગ આપીએ છીએ.' },
+  why12_desc: { en: 'We offer coaching in both Gujarati and English medium. For 11th-12th, we specialize in Commerce stream.', gu: 'અમે ગુજરાતી અને અંગ્રેજી બંને માધ્યમમાં કોચિંગ આપીએ છીએ. ૧૧મા-૧૨મા માટે, અમે માત્ર કોમર્સ સ્ટ્રીમમાં નિષ્ણાત છીએ.' },
 
   // Contact Form
   contact_title: { en: 'Enquiry Form', gu: 'પૂછપરછ ફોર્મ' },
@@ -87,6 +87,19 @@ const translations: Translations = {
   form_submit: { en: 'Send Enquiry', gu: 'પૂછપરછ મોકલો' },
   form_success: { en: 'Your enquiry has been sent successfully! We will contact you soon.', gu: 'તમારી પૂછપરછ સફળતાપૂર્વક મોકલવામાં આવી છે! અમે ટૂંક સમયમાં તમારો સંપર્ક કરીશું.' },
   form_error: { en: 'There was an error sending your enquiry. Please try again.', gu: 'તમારી પૂછપરછ મોકલવામાં ભૂલ આવી. કૃપા કરીને ફરી પ્રયાસ કરો.' },
+
+  // Validation Messages
+  validator_required_fields: { en: 'Please fill in all required fields.', gu: 'કૃપા કરીને બધી ફરજિયાત માહિતી ભરો.' },
+  validator_phone_invalid: { en: 'Please enter a valid 10-digit Indian number (starting with 6, 7, 8, or 9).', gu: 'કૃપા કરીને માન્ય ૧૦-આંકડાનો ભારતીય નંબર દાખલ કરો (૬, ૭, ૮, અથવા ૯ થી શરૂ થતો).' },
+  validator_name_numbers_student: { en: 'Student Name should not contain numbers.', gu: 'વિદ્યાર્થીના નામમાં આંકડા ન હોવા જોઈએ.' },
+  validator_name_numbers_parent: { en: 'Parent Name should not contain numbers.', gu: 'વાલીના નામમાં આંકડા ન હોવા જોઈએ.' },
+  validator_name_length: { en: 'Name should not exceed 200 characters.', gu: 'નામ ૨૦૦ અક્ષરોથી વધુ ન હોવું જોઈએ.' },
+
+  // Placeholders
+  form_student_name_placeholder: { en: 'Enter Student Name', gu: 'વિદ્યાર્થીનું નામ લખો' },
+  form_parent_name_placeholder: { en: 'Enter Parent Name (Optional)', gu: 'માતાપિતાનું નામ લખો (વૈકલ્પિક)' },
+  form_phone_placeholder: { en: 'Enter 10-digit number', gu: '૧૦-આંકડાનો નંબર લખો' },
+  form_message_placeholder: { en: 'Write your questions here...', gu: 'તમારા પ્રશ્નો અહીં લખો...' },
 
   // Mediums
   med_eng: { en: 'English Medium', gu: 'અંગ્રેજી માધ્યમ' },
@@ -114,7 +127,7 @@ const translations: Translations = {
   area_bapunagar: { en: 'Bapunagar', gu: 'બાપુનગર' },
 
   // Footer
-  footer_brand: { en: 'Yash Personal Tution', gu: 'યશ પર્સનલ ટ્યુશન' },
+  footer_brand: { en: 'Yash Personal Tuition', gu: 'યશ પર્સનલ ટ્યુશન' },
   footer_tagline: { en: 'Three decades of shaping futures through dedicated, personalized academic coaching in Ahmedabad.', gu: 'અમદાવાદમાં સમર્પિત, વ્યક્તિગત શૈક્ષણિક કોચિંગ દ્વારા ભવિષ્ય ઘડવાના ત્રણ દાયકા.' },
   footer_quick_links: { en: 'Quick Links', gu: 'ઝડપી લિંક્સ' },
   footer_contact_us: { en: 'Contact Us', gu: 'અમારો સંપર્ક' },
@@ -122,7 +135,7 @@ const translations: Translations = {
   footer_location_label: { en: 'Location', gu: 'સ્થળ' },
   footer_address: { en: 'Ahmedabad, Gujarat, India', gu: 'અમદાવાદ, ગુજરાત, ભારત' },
   footer_phone: { en: 'Phone', gu: 'ફોન' },
-  footer_email: { en: 'yashpersonaltuition@gmail.com', gu: 'yashpersonaltuition@gmail.com' },
+  footer_email: { en: 'manishkshah55@gmail.com', gu: 'manishkshah55@gmail.com' },
   footer_chat_whatsapp: { en: 'Chat on WhatsApp', gu: 'WhatsApp પર ચેટ કરો' },
 
   // Nav - testimonials

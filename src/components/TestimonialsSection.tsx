@@ -4,15 +4,15 @@ import { Star, Quote } from 'lucide-react';
 
 const testimonials = [
   {
-    quote_en: "My daughter's grades improved dramatically after joining Yash sir's tuition. The personal attention and structured approach made all the difference. Highly recommended!",
-    quote_gu: "યશ સરના ટ્યુશનમાં જોડાયા પછી મારી દીકરીના ગ્રેડ નાટ્યાત્મક રીતે સુધર્યા. વ્યક્તિગત ધ્યાન અને વ્યવસ્થિત અભિગમે બધો ફરક પાડ્યો.",
+    quote_en: "My daughter's grades improved dramatically after joining Manish sir's Tuition. The personal attention and structured approach made all the difference. Highly recommended!",
+    quote_gu: "મનીષ સરના ટ્યુશનમાં જોડાયા પછી મારી દીકરીના ગ્રેડ નાટ્યાત્મક રીતે સુધર્યા. વ્યક્તિગત ધ્યાન અને વ્યવસ્થિત અભિગમે બધો ફરક પાડ્યો.",
     name: 'Priya Mehta',
     role_en: 'Parent – Class 10 • Maninagar',
     role_gu: 'વાલી – ધોરણ ૧૦ • મણિનગર',
   },
   {
-    quote_en: "Three generations of our family have been taught by Yash sir. His dedication and commitment to each student is unmatched. My son secured 92% in board exams.",
-    quote_gu: "અમારા પરિવારની ત્રણ પેઢીઓને યશ સરે ભણાવ્યા છે. દરેક વિદ્યાર્થી પ્રત્યેનું તેમનું સમર્પણ અજોડ છે. મારા દીકરાએ બોર્ડ પરીક્ષામાં ૯૨% મેળવ્યા.",
+    quote_en: "Manish Sir’s guidance has made a remarkable difference in my son’s academic journey. His personal attention and disciplined teaching approach helped my son secure 92% in board exams. We are truly thankful for his continuous support.",
+    quote_gu: "મનીષ સરના માર્ગદર્શનથી મારા દીકરાની શૈક્ષણિક યાત્રામાં નોંધપાત્ર સુધારો થયો છે. તેમનું વ્યક્તિગત ધ્યાન અને શિસ્તબદ્ધ શિક્ષણ અભિગમે મારા દીકરાને બોર્ડની પરીક્ષામાં ૯૨% મેળવવામાં મદદ કરી. અમે તેમના સતત સમર્થન માટે ખરેખર આભારી છીએ.",
     name: 'Rajesh Patel',
     role_en: 'Parent – Class 12 Commerce • Isanpur',
     role_gu: 'વાલી – ધોરણ ૧૨ વાણિજ્ય • ઇસનપુર',
@@ -25,8 +25,8 @@ const testimonials = [
     role_gu: 'ભૂતપૂર્વ વિદ્યાર્થી – હવે એન્જિનિયર • વટવા',
   },
   {
-    quote_en: "What I love most is the regular feedback. Yash sir always keeps us updated about our child's progress. It feels like a genuine partnership.",
-    quote_gu: "મને સૌથી વધુ ગમે છે નિયમિત ફીડબેક. યશ સર હંમેશા અમારા બાળકની પ્રગતિ વિશે અપડેટ રાખે છે.",
+    quote_en: "What I love most is the regular feedback. Manish sir always keeps us updated about our child's progress. It feels like a genuine partnership.",
+    quote_gu: "મને સૌથી વધુ ગમે છે નિયમિત ફીડબેક. મનીષ સર હંમેશા અમારા બાળકની પ્રગતિ વિશે અપડેટ રાખે છે.",
     name: 'Kiran Joshi',
     role_en: 'Parent – Class 8 • Naroda',
     role_gu: 'વાલી – ધોરણ ૮ • નરોડા',
@@ -78,8 +78,8 @@ const TestimonialsSection = () => {
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
             {language === 'en'
-              ? "Real words from real families who have trusted Yash Personal Tuition with their children's education."
-              : 'સાચા પરિવારોના સાચા શબ્દો જેમણે તેમના બાળકોના શિક્ષણ માટે યશ પર્સનલ ટ્યુશન પર ભરોસો કર્યો છે.'}
+              ? "Feedback that reflects the learning experience at Yash Personal Tuition."
+              : "યશ પર્સનલ ટ્યુશનમાં મળતા શિક્ષણના અનુભવને દર્શાવતું પ્રતિસાદ."}
           </motion.p>
         </div>
 
@@ -111,8 +111,46 @@ const TestimonialsSection = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* "And many more" indicator */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-10 flex flex-col items-center gap-3"
+        >
+          <div className="flex items-center gap-3">
+            {/* Stacked avatar circles */}
+            {['🧑', '👩', '👨', '👧', '🧒'].map((emoji, i) => (
+              <div
+                key={i}
+                className="w-9 h-9 rounded-full bg-primary/10 border-2 border-background flex items-center justify-center text-base"
+                style={{ marginLeft: i > 0 ? '-10px' : '0', zIndex: 5 - i }}
+              >
+                {emoji}
+              </div>
+            ))}
+          </div>
+          <p className="text-sm text-muted-foreground font-medium">
+            {language === 'en'
+              ? '…and 500+ more happy families trust Manish sir.'
+              : '…અને ૫૦૦+ થી વધુ ખુશ પરિવારો મનીષ સર પર ભરોસો કરે છે.'}
+          </p>
+          <div className="flex gap-0.5">
+            {[...Array(5)].map((_, j) => (
+              <Star key={j} className="w-4 h-4 fill-amber-400 text-amber-400" />
+            ))}
+
+            <span className="ml-2 text-sm text-muted-foreground">
+              {language === 'en' ? '4.9 average rating' : '૪.૯ સરેરાશ રેટિંગ'}
+            </span>
+          </div>
+        </motion.div>
+
       </div>
     </section>
+
   );
 };
 

@@ -37,20 +37,50 @@ const ContactForm = () => {
     e.preventDefault();
 
     if (!formData.studentName.trim() || !formData.phone.trim() || !formData.standard || !formData.medium || !formData.area) {
-      toast.error('Please fill in all required fields.');
+      toast.error(t('validator_required_fields'));
+      return;
+    }
+
+    if (/\d/.test(formData.studentName)) {
+      toast.error(t('validator_name_numbers_student'));
+      return;
+    }
+
+    if (/\d/.test(formData.parentName)) {
+      toast.error(t('validator_name_numbers_parent'));
+      return;
+    }
+
+    if (formData.studentName.length > 200 || formData.parentName.length > 200) {
+      toast.error(t('validator_name_length'));
       return;
     }
 
     const phoneClean = formData.phone.replace(/\D/g, '');
-    if (phoneClean.length < 10) {
-      toast.error('Please enter a valid phone number.');
+    const indianPhoneRegex = /^[6-9]\d{9}$/;
+
+    if (!indianPhoneRegex.test(phoneClean)) {
+      toast.error(t('validator_phone_invalid'));
       return;
     }
 
     const waMsg = encodeURIComponent(
-      `Hello Yash Personal Tuition,\n\nStudent Name: ${formData.studentName.trim()}\nParent Name: ${formData.parentName.trim() || 'N/A'}\nPhone: ${formData.phone.trim()}\nStandard: ${t(formData.standard)}\nMedium: ${t(formData.medium)}\nArea: ${t(formData.area)}\nMessage: ${formData.message.trim() || 'N/A'}\n\nThank you`
+      `Hello Manish Sir (Yash Personal Tuition),
+
+I would like to enquire about admission.
+
+Student Name: ${formData.studentName.trim()}
+Parent Name: ${formData.parentName.trim() || 'N/A'}
+Phone: ${formData.phone.trim()}
+Standard: ${t(formData.standard)}
+Medium: ${t(formData.medium)}
+Area: ${t(formData.area)}
+Questions: ${formData.message.trim() || 'N/A'}
+
+Thank you`
     );
-    const waUrl = `https://wa.me/919374973636?text=${waMsg}`;
+
+    const waUrl = `https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER}?text=${waMsg}`;
 
     setSubmitted(true);
     toast.success(t('form_success'));
@@ -64,7 +94,6 @@ const ContactForm = () => {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-
     setTimeout(() => setSubmitted(false), 5000);
   };
 
@@ -98,7 +127,7 @@ const ContactForm = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             onSubmit={handleSubmit}
-            
+
             className="p-6 sm:p-8 rounded-2xl bg-card shadow-card space-y-5"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -110,10 +139,10 @@ const ContactForm = () => {
                   name="studentName"
                   value={formData.studentName}
                   onChange={handleChange}
-                  maxLength={100}
+                  maxLength={200}
                   required
                   className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
-                  placeholder={t('form_student_name')}
+                  placeholder={t('form_student_name_placeholder')}
                 />
               </div>
 
@@ -125,9 +154,9 @@ const ContactForm = () => {
                   name="parentName"
                   value={formData.parentName}
                   onChange={handleChange}
-                  maxLength={100}
+                  maxLength={200}
                   className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
-                  placeholder={t('form_parent_name')}
+                  placeholder={t('form_parent_name_placeholder')}
                 />
               </div>
             </div>
@@ -141,10 +170,10 @@ const ContactForm = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  maxLength={15}
+                  maxLength={10}
                   required
                   className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
-                  placeholder="+91 XXXXX XXXXX"
+                  placeholder={t('form_phone_placeholder')}
                 />
               </div>
 
@@ -212,7 +241,7 @@ const ContactForm = () => {
                 rows={3}
                 maxLength={500}
                 className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow resize-none"
-                placeholder={t('form_message')}
+                placeholder={t('form_message_placeholder')}
               />
             </div>
 

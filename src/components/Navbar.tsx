@@ -32,7 +32,7 @@ const Navbar = () => {
               <GraduationCap className="w-6 h-6 text-primary-foreground" />
             </div>
             <span className="font-display text-xl font-bold text-foreground hidden sm:block">
-              {language === 'en' ? 'Yash Personal Tution' : 'યશ પર્સનલ ટ્યુશન'}
+              {language === 'en' ? 'Yash Personal Tuition' : 'યશ પર્સનલ ટ્યુશન'}
             </span>
           </a>
 
