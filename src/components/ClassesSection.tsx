@@ -48,7 +48,13 @@ const ClassesSection = () => {
                 <cls.icon className="w-7 h-7" />
               </div>
               <h3 className="font-display text-xl font-bold text-foreground mb-3">{t(cls.title)}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{t(cls.desc)}</p>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">{t(cls.desc)}</p>
+              <button
+                onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-sm font-semibold text-primary hover:underline transition-colors"
+              >
+                {t('classes_learn_more')} →
+              </button>
             </motion.div>
           ))}
         </div>

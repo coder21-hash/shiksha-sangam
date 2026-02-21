@@ -12,6 +12,7 @@ const Navbar = () => {
     { key: 'nav_about', href: '#about' },
     { key: 'nav_classes', href: '#classes' },
     { key: 'nav_why_us', href: '#why-us' },
+    { key: 'nav_testimonials', href: '#testimonials' },
     { key: 'nav_contact', href: '#contact' },
   ];
 
