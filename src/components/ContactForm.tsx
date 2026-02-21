@@ -1,9 +1,8 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle, Loader2 } from 'lucide-react';
+import { Send, CheckCircle } from 'lucide-react';
 import { toast } from 'sonner';
-import emailjs from '@emailjs/browser';
 
 const STANDARDS = [
   'std_5', 'std_6', 'std_7', 'std_8', 'std_9', 'std_10',
@@ -19,7 +18,6 @@ const AREAS = [
 
 const ContactForm = () => {
   const { t } = useLanguage();
-  const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     parentName: '',
     studentName: '',
@@ -29,15 +27,13 @@ const ContactForm = () => {
     area: '',
     message: '',
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [debugParams, setDebugParams] = useState<any>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formData.studentName.trim() || !formData.phone.trim() || !formData.standard || !formData.medium || !formData.area) {
@@ -45,85 +41,24 @@ const ContactForm = () => {
       return;
     }
 
-    // Validate phone
     const phoneClean = formData.phone.replace(/\D/g, '');
     if (phoneClean.length < 10) {
       toast.error('Please enter a valid phone number.');
       return;
     }
 
-    setIsSubmitting(true);
+    const waMsg = encodeURIComponent(
+      `Hello Yash Personal Tuition,\n\nStudent Name: ${formData.studentName.trim()}\nParent Name: ${formData.parentName.trim() || 'N/A'}\nPhone: ${formData.phone.trim()}\nStandard: ${t(formData.standard)}\nMedium: ${t(formData.medium)}\nArea: ${t(formData.area)}\nMessage: ${formData.message.trim() || 'N/A'}\n\nThank you`
+    );
+    const waUrl = `https://wa.me/919374973636?text=${waMsg}`;
 
-    // Read env vars (Vite prefixes)
-    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
-    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
-    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
+    setSubmitted(true);
+    toast.success(t('form_success'));
+    setFormData({ parentName: '', studentName: '', phone: '', standard: '', medium: '', area: '', message: '' });
 
-    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
-      console.error('EmailJS env missing', { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY });
-      toast.error('Email service is not configured. Please contact the site admin.');
-      setIsSubmitting(false);
-      return;
-    }
+    window.open(waUrl, '_blank');
 
-    try {
-      // initialize EmailJS (helps ensure proper setup)
-      try {
-        // emailjs.init is safe to call multiple times
-        // @ts-ignore
-        if (typeof emailjs.init === 'function') emailjs.init(PUBLIC_KEY);
-      } catch (initErr) {
-        console.warn('emailjs.init warning:', initErr);
-      }
-
-      const templateParams = {
-        student_name: formData.studentName.trim(),
-        parent_name: formData.parentName.trim() || 'N/A',
-        phone: formData.phone.trim(),
-        standard: t(formData.standard),
-        medium: t(formData.medium),
-        area: t(formData.area),
-        message: formData.message.trim() || 'N/A',
-        to_email: 'akshatshah187@gmail.com',
-        subject: 'New Enquiry - Yash Personal Tution'
-      };
-
-      // Debug: expose params for local inspection (dev only)
-      try {
-        setDebugParams(templateParams);
-        // also expose on window for quick copy/paste when debugging
-        // @ts-ignore
-        if (typeof window !== 'undefined') window.__lastEmailJsTemplateParams = templateParams;
-        console.debug('EmailJS templateParams:', templateParams);
-      } catch (dErr) {
-        console.warn('debug set failed', dErr);
-      }
-
-      // attempt to send
-      const resp = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
-      console.info('EmailJS send response:', resp);
-
-      // Build WhatsApp message
-      const waMsg = encodeURIComponent(
-        `Hello Yash Personal Tuition,\n\nStudent Name: ${formData.studentName.trim()}\nParent Name: ${formData.parentName.trim() || 'N/A'}\nPhone: ${formData.phone.trim()}\nStandard: ${t(formData.standard)}\nMedium: ${t(formData.medium)}\nArea: ${t(formData.area)}\nMessage: ${formData.message.trim() || 'N/A'}\n\nThank you`
-      );
-      const waUrl = `https://wa.me/919624052715?text=${waMsg}`;
-
-      setSubmitted(true);
-      toast.success(t('form_success'));
-      setFormData({ parentName: '', studentName: '', phone: '', standard: '', medium: '', area: '', message: '' });
-
-      // Open WhatsApp in new tab
-      window.open(waUrl, '_blank');
-
-      setTimeout(() => setSubmitted(false), 5000);
-    } catch (error: any) {
-      console.error('Email send error:', error);
-      const message = error?.text || error?.message || JSON.stringify(error);
-      toast.error(`${t('form_error')}: ${message}`);
-    } finally {
-      setIsSubmitting(false);
-    }
+    setTimeout(() => setSubmitted(false), 5000);
   };
 
   return (
@@ -156,7 +91,7 @@ const ContactForm = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             onSubmit={handleSubmit}
-            ref={formRef}
+            
             className="p-6 sm:p-8 rounded-2xl bg-card shadow-card space-y-5"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -276,15 +211,10 @@ const ContactForm = () => {
 
             <button
               type="submit"
-              disabled={isSubmitting || submitted}
+              disabled={submitted}
               className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-lg hover:brightness-110 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  Sending...
-                </>
-              ) : submitted ? (
+              {submitted ? (
                 <>
                   <CheckCircle className="w-5 h-5" />
                   {t('form_success')}
