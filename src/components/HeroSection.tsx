@@ -1,6 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
-import { ArrowRight, Phone, Award, Users } from 'lucide-react';
+import { ArrowRight, Phone, Award, Users, MessageCircle } from 'lucide-react';
 import fatherPhoto from '@/assets/father-photo.png';
 
 const HeroSection = () => {
@@ -70,6 +70,15 @@ const HeroSection = () => {
               >
                 <Phone className="w-5 h-5" />
                 +91 96240 52715
+              </a>
+              <a
+                href="https://wa.me/919624052715"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 rounded-xl bg-green-500 hover:bg-green-600 text-white font-semibold text-lg transition-all flex items-center gap-2"
+              >
+                <MessageCircle className="w-5 h-5" />
+                {t('hero_whatsapp')}
               </a>
             </motion.div>
 

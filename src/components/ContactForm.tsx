@@ -12,6 +12,11 @@ const STANDARDS = [
 
 const MEDIUMS = ['med_eng', 'med_guj'];
 
+const AREAS = [
+  'area_maninagar', 'area_isanpur', 'area_vatva', 'area_narol',
+  'area_lambha', 'area_naroda', 'area_nikol', 'area_bapunagar',
+];
+
 const ContactForm = () => {
   const { t } = useLanguage();
   const formRef = useRef<HTMLFormElement>(null);
@@ -21,6 +26,7 @@ const ContactForm = () => {
     phone: '',
     standard: '',
     medium: '',
+    area: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,7 +40,7 @@ const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.studentName.trim() || !formData.phone.trim() || !formData.standard || !formData.medium) {
+    if (!formData.studentName.trim() || !formData.phone.trim() || !formData.standard || !formData.medium || !formData.area) {
       toast.error('Please fill in all required fields.');
       return;
     }
@@ -76,6 +82,7 @@ const ContactForm = () => {
         phone: formData.phone.trim(),
         standard: t(formData.standard),
         medium: t(formData.medium),
+        area: t(formData.area),
         message: formData.message.trim() || 'N/A',
         to_email: 'akshatshah187@gmail.com',
         subject: 'New Enquiry - Yash Personal Tution'
@@ -96,9 +103,19 @@ const ContactForm = () => {
       const resp = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
       console.info('EmailJS send response:', resp);
 
+      // Build WhatsApp message
+      const waMsg = encodeURIComponent(
+        `Hello Yash Personal Tuition,\n\nStudent Name: ${formData.studentName.trim()}\nParent Name: ${formData.parentName.trim() || 'N/A'}\nPhone: ${formData.phone.trim()}\nStandard: ${t(formData.standard)}\nMedium: ${t(formData.medium)}\nArea: ${t(formData.area)}\nMessage: ${formData.message.trim() || 'N/A'}\n\nThank you`
+      );
+      const waUrl = `https://wa.me/919624052715?text=${waMsg}`;
+
       setSubmitted(true);
       toast.success(t('form_success'));
-      setFormData({ parentName: '', studentName: '', phone: '', standard: '', medium: '', message: '' });
+      setFormData({ parentName: '', studentName: '', phone: '', standard: '', medium: '', area: '', message: '' });
+
+      // Open WhatsApp in new tab
+      window.open(waUrl, '_blank');
+
       setTimeout(() => setSubmitted(false), 5000);
     } catch (error: any) {
       console.error('Email send error:', error);
@@ -225,19 +242,36 @@ const ContactForm = () => {
                 </select>
               </div>
 
-              {/* Message (keeps layout consistent) */}
+              {/* Area */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-1.5">{t('form_message')}</label>
-                <textarea
-                  name="message"
-                  value={formData.message}
+                <label className="block text-sm font-medium text-foreground mb-1.5">{t('form_area')} *</label>
+                <select
+                  name="area"
+                  value={formData.area}
                   onChange={handleChange}
-                  rows={4}
-                  maxLength={500}
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow resize-none"
-                  placeholder={t('form_message')}
-                />
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+                >
+                  <option value="">{t('form_area')}</option>
+                  {AREAS.map(area => (
+                    <option key={area} value={area}>{t(area)}</option>
+                  ))}
+                </select>
               </div>
+            </div>
+
+            {/* Message */}
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-1.5">{t('form_message')}</label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows={3}
+                maxLength={500}
+                className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow resize-none"
+                placeholder={t('form_message')}
+              />
             </div>
 
             <button

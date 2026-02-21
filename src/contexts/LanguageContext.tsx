@@ -102,12 +102,37 @@ const translations: Translations = {
   std_11_com: { en: 'Standard 11 - Commerce', gu: 'ધોરણ ૧૧ - વાણિજ્ય' },
   std_12_com: { en: 'Standard 12 - Commerce', gu: 'ધોરણ ૧૨ - વાણિજ્ય' },
 
+  // Form - Area
+  form_area: { en: 'Select Area', gu: 'વિસ્તાર પસંદ કરો' },
+  area_maninagar: { en: 'Maninagar', gu: 'મણિનગર' },
+  area_isanpur: { en: 'Isanpur', gu: 'ઇસનપુર' },
+  area_vatva: { en: 'Vatva', gu: 'વટવા' },
+  area_narol: { en: 'Narol', gu: 'નરોલ' },
+  area_lambha: { en: 'Lambha', gu: 'લાંભા' },
+  area_naroda: { en: 'Naroda', gu: 'નરોડા' },
+  area_nikol: { en: 'Nikol', gu: 'નિકોલ' },
+  area_bapunagar: { en: 'Bapunagar', gu: 'બાપુનગર' },
+
   // Footer
   footer_brand: { en: 'Yash Personal Tution', gu: 'યશ પર્સનલ ટ્યુશન' },
+  footer_tagline: { en: 'Three decades of shaping futures through dedicated, personalized academic coaching in Ahmedabad.', gu: 'અમદાવાદમાં સમર્પિત, વ્યક્તિગત શૈક્ષણિક કોચિંગ દ્વારા ભવિષ્ય ઘડવાના ત્રણ દાયકા.' },
+  footer_quick_links: { en: 'Quick Links', gu: 'ઝડપી લિંક્સ' },
+  footer_contact_us: { en: 'Contact Us', gu: 'અમારો સંપર્ક' },
   footer_rights: { en: 'All Rights Reserved', gu: 'સર્વ હક્ક અમારી પાસે રાખેલ છે' },
   footer_location_label: { en: 'Location', gu: 'સ્થળ' },
   footer_address: { en: 'Ahmedabad, Gujarat, India', gu: 'અમદાવાદ, ગુજરાત, ભારત' },
   footer_phone: { en: 'Phone', gu: 'ફોન' },
+  footer_email: { en: 'yashpersonaltuition@gmail.com', gu: 'yashpersonaltuition@gmail.com' },
+  footer_chat_whatsapp: { en: 'Chat on WhatsApp', gu: 'WhatsApp પર ચેટ કરો' },
+
+  // Nav - testimonials
+  nav_testimonials: { en: 'Testimonials', gu: 'પ્રશંસાપત્રો' },
+
+  // Classes - learn more
+  classes_learn_more: { en: 'Learn More', gu: 'વધુ જાણો' },
+
+  // Hero - WhatsApp
+  hero_whatsapp: { en: 'Chat on WhatsApp', gu: 'WhatsApp પર ચેટ કરો' },
 };
 
 interface LanguageContextType {
