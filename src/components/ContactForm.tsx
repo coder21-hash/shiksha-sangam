@@ -56,7 +56,14 @@ const ContactForm = () => {
     toast.success(t('form_success'));
     setFormData({ parentName: '', studentName: '', phone: '', standard: '', medium: '', area: '', message: '' });
 
-    window.open(waUrl, '_blank');
+    // Use a temporary anchor to reliably open WhatsApp in a new tab
+    const a = document.createElement('a');
+    a.href = waUrl;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 
     setTimeout(() => setSubmitted(false), 5000);
   };
