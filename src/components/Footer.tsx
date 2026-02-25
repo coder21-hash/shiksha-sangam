@@ -32,7 +32,7 @@ const Footer = () => {
               {t('footer_tagline')}
             </p>
             <a
-              href="https://wa.me/919624052715"
+              href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-green-500 hover:bg-green-600 text-white text-sm font-semibold transition-colors"
