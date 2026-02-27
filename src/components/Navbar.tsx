@@ -18,8 +18,19 @@ const Navbar = () => {
 
   const scrollTo = (href: string) => {
     setIsOpen(false);
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: 'smooth' });
+    if (window.location.hash !== href) {
+      window.location.hash = href;
+      return;
+    }
+    const targetId = href.startsWith('#') ? href.slice(1) : href;
+    const doScroll = () => {
+      const el = document.getElementById(targetId);
+      if (!el) return;
+      const offset = 80;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    };
+    setTimeout(doScroll, 150);
   };
 
   return (
